@@ -18,6 +18,7 @@ function cleanInput() {
 function onSearch(evt) {
   if (!evt.target.value) {
     cleanInput();
+    Notiflix.Notify.warning('Please enter any data!');
     return;
   }
 

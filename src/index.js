@@ -10,15 +10,15 @@ const countryInfo = document.querySelector('.country-info');
 
 inputForm.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
-function cleanInput() {
+function cleanInput(evt) {
   countryList.innerHTML = '';
   countryInfo.innerHTML = '';
+  return;
 }
 
 function onSearch(evt) {
-  if (!evt.target.value) {
+  if (!evt.target.value.trim()) {
     cleanInput();
-    Notiflix.Notify.warning('Please enter any data!');
     return;
   }
 
@@ -58,10 +58,8 @@ function countryListMarkup(countries) {
 function countryInfoMarkup(countries) {
   return countries
     .map(({ flags, name, capital, population, languages }) => {
-      return `<img src="${flags.svg}" alt=" ${
-        name.official
-      }" width="70" height="50" />
-                <h1>${name.official}</h1>
+      return `<img src="${flags.svg}" alt=" ${name}" width="70" height="50" />
+                <h1>${name}</h1>
                 <p><span>Capital:</span> ${capital}</p>
                 <p><span>Population:</span> ${population}</p>
                 <p>
